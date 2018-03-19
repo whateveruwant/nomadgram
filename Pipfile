@@ -1,18 +1,15 @@
 [[source]]
-name = "pypi"
-verify_ssl = true
+
 url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
 
-[requires]
-python_version = "3.5"
-
-[dev-packages]
 
 [packages]
-cookiecutter = "*"
+
 pytz = "==2018.3"
 awesome-slugify = "==1.6.5"
-Pillow = "==5.0.0"
+pillow = "==5.0.0"
 "argon2_cffi" = "==18.1.0"
 whitenoise = "==3.3.1"
 redis = ">=2.10.5"
@@ -38,3 +35,12 @@ django-debug-toolbar = "==1.9.1"
 django-extensions = "==2.0.6"
 django_coverage_plugin = "==1.5.0"
 pytest-django = "==3.1.2"
+
+
+[dev-packages]
+
+
+
+[requires]
+
+python_version = "3.6"
