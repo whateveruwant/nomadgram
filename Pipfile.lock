@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "af8e76c0acd1cc2ae074d37e38915521707c61a905ee5945549d8a4c68bb277f"
+            "sha256": "e418d8e5c9587da8aca7c843d5e60680c82052b7aa40ad2c21c7a3916b834e32"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -22,14 +22,6 @@
                 "sha256:37cdcb9e9954ed60912ebc1ca12a9d12178c26637abdf124e3cde2341c257fe0"
             ],
             "version": "==0.7.10"
-        },
-        "appnope": {
-            "hashes": [
-                "sha256:5b26757dc6f79a3b7dc9fab95359328d5747fcb2409d331ea66d0272b90ab2a0",
-                "sha256:8b995ffe925347a2138d7ac0fe77155e4311a0ea6d6da4f5128fe4b3cbe5ed71"
-            ],
-            "markers": "sys_platform == 'darwin'",
-            "version": "==0.1.0"
         },
         "argon2-cffi": {
             "hashes": [
@@ -200,11 +192,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:3d9916515599f757043c690ae2b5ea28666afa09779636351da505396cbb2f19",
-                "sha256:769f212ffd5762f72c764fa648fca3b7f7dd4ec27407198b68e7c4abf4609fd0"
+                "sha256:74077d7309b48b97dacdac2dfb35c968028becf00a7a684e7f29b2af1b980edc",
+                "sha256:fd186d544c7c2f835668cf11f77be071307c9eb22615a5b3a16bdb14c8357f41"
             ],
             "index": "pypi",
-            "version": "==2.0.3"
+            "version": "==1.11.11"
         },
         "django-allauth": {
             "hashes": [
