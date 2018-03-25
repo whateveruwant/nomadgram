@@ -51,17 +51,32 @@ class UserFollowers(APIView):
             found_user = models.User.objects.get(username=username)
         except models.User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
         user_followers = found_user.followers.all()
-        serializer = serializers.ListUserSerailizer(user_followers, many=True)
+        serializer = serializers.CountImageSerializer(user_followers, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
 
-class UserFollowing(APIView):
+class UserFollowing(APIView): # class based view
     def get(self, request, username, format=None):
         try:
             found_user = models.User.objects.get(username=username)
         except models.User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+        user_following = found_user.following.all()
+        serializer = serializers.CountImageSerializer(user_following, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+''' function based view
+def UserFollowingFBV(request, username):
+    if request.method == 'GET':
+        try:
+            found_user = models.User.objects.get(username=username)
+        except models.User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
         user_following = found_user.following.all()
         serializer = serializers.ListUserSerailizer(user_following, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+'''
