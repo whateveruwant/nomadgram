@@ -1,6 +1,12 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework import status
 from . import models, serializers
+
+
+def get_created_at(image):
+    return image.created_at
+
 
 class Feed(APIView):
     def get(self, request, format=None):
@@ -19,5 +25,45 @@ class Feed(APIView):
         serializer = serializers.ImageSerializer(sorted_list, many=True)
         return Response(serializer.data)
 
-def get_created_at(image):
-    return image.created_at
+
+class LikeImage(APIView):
+    def post(self, request, image_id, format=None):
+        # print(image_id)
+        try:
+            found_image = models.Image.objects.get(id=image_id)
+        except models.Image.DoesNotExist:
+            return Response(status=404)
+        
+        # print(image)
+
+        try:
+            preexisiting_like = models.Like.objects.get(
+                creator=request.user,
+                image=found_image
+            )
+            preexisiting_like.delete()
+            return Response(status=204)
+        except models.Like.DoesNotExist:
+            new_like = models.Like.objects.create(
+                creator=request.user,
+                image=found_image
+            )
+            new_like.save()
+            return Response(status=status.HTTP_201_CREATED)
+
+
+class CommentOnImage(APIView):
+    def post(self, request, image_id, format=None):
+        # print(request.data)
+        try:
+            found_image = models.Image.objects.get(id=image_id)
+        except models.Image.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = serializers.CommentSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save(creator=request.user, image=found_image)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
