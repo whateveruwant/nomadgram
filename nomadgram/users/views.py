@@ -8,3 +8,27 @@ class ExploreUsers(APIView):
         last_five = models.User.objects.all().order_by('-date_joined')[:5]
         serializer = serializers.ExploreUserSerailizer(last_five, many=True)
         return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+class FollowUser(APIView):
+    def post(self, request, user_id, format=None):
+        try:
+            user_to_follow = models.User.objects.get(id=user_id)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        request.user.following.add(user_to_follow)
+        request.user.save()
+        return Response(status=status.HTTP_200_OK)
+
+
+class UnFollowUser(APIView):
+    def post(self, request, user_id, format=None):
+        try:
+            user_to_follow = models.User.objects.get(id=user_id)
+        except:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        request.user.following.remove(user_to_follow)
+        request.user.save()
+        return Response(status=status.HTTP_200_OK)
