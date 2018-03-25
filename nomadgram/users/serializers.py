@@ -18,7 +18,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         )
 
 
-class ExploreUserSerailizer(serializers.ModelSerializer):
+class ListUserSerailizer(serializers.ModelSerializer):
     class Meta:
         model = models.User
         fields = (
