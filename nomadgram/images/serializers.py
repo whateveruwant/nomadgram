@@ -54,3 +54,12 @@ class CountImageSerializer(serializers.ModelSerializer):
             'like_count',
             'comment_count'
         )
+
+
+class SmallImageSerializer(serializers.ModelSerializer):
+    """ Used for the notification """
+    class Meta:
+        model = models.Image
+        fields = (
+            'file',
+        )
