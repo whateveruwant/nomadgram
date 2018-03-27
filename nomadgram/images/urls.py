@@ -8,6 +8,11 @@ urlpatterns = [
         name='feed'
     ),
     url(
+        regex=r'^(?P<image_id>[0-9]+)/$',
+        view=views.ImageDetail.as_view(),
+        name='image_detail'
+    ),
+    url(
         # regex=r'(?P<image_id>\w+)/like/',
         regex=r'^(?P<image_id>[0-9]+)/like/$', # django 2.0 버전부터는 업데이트 필요
         view=views.LikeImage.as_view(),
@@ -22,6 +27,11 @@ urlpatterns = [
         regex=r'^(?P<image_id>[0-9]+)/comments/$',
         view=views.CommentOnImage.as_view(),
         name='comment_image'
+    ),
+    url(
+        regex=r'^(?P<image_id>[0-9]+)/comments/(?P<comment_id>[0-9]+)/$',
+        view=views.ModerateComments.as_view(),
+        name='moderatecomment_image'
     ),
     url(
         regex=r'^comments/(?P<comment_id>[0-9]+)/$',
