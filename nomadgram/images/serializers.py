@@ -26,7 +26,9 @@ class CommentSerializer(serializers.ModelSerializer):
 class LikeSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Like
-        fields = '__all__'
+        fields = {
+            'creator',
+        }
 
 
 class ImageSerializer(serializers.ModelSerializer):
@@ -63,4 +65,14 @@ class SmallImageSerializer(serializers.ModelSerializer):
         model = models.Image
         fields = (
             'file',
+        )
+
+    
+class InputImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Image
+        fields = (
+            'file',
+            'location',
+            'caption',
         )
