@@ -13,13 +13,13 @@ urlpatterns = [
         name='image_detail'
     ),
     url(
-        # regex=r'(?P<image_id>\w+)/like/',
-        regex=r'^(?P<image_id>[0-9]+)/like/$', # django 2.0 버전부터는 업데이트 필요
+        # regex=r'(?P<image_id>\w+)/likes/',
+        regex=r'^(?P<image_id>[0-9]+)/likes/$', # django 2.0 버전부터는 업데이트 필요
         view=views.LikeImage.as_view(),
         name='like_image'
     ),
     url(
-        regex=r'^(?P<image_id>[0-9]+)/unlike/$',
+        regex=r'^(?P<image_id>[0-9]+)/unlikes/$',
         view=views.UnLikeImage.as_view(),
         name='unlike_image'
     ),
