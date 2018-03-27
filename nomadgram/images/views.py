@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from . import models, serializers
+from nomadgram.notifications import views as notification_views
 
 
 def get_created_at(image):
@@ -48,6 +49,7 @@ class LikeImage(APIView):
                 image=found_image
             )
             new_like.save()
+            notification_views.create_notification(request.user, found_image.creator, 'like', found_image)
             return Response(status=status.HTTP_201_CREATED)
 
 
@@ -80,6 +82,7 @@ class CommentOnImage(APIView):
 
         if serializer.is_valid():
             serializer.save(creator=request.user, image=found_image)
+            notification_views.create_notification(request.user, found_image.creator, 'comment', found_image, request.data['message'])
             return Response(data=serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
