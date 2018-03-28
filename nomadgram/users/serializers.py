@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from . import models
+from taggit_serializer.serializers import (TagListSerializerField, TaggitSerializer)
 from nomadgram.images import serializers as images_serializers
 
 class UserProfileSerializer(serializers.ModelSerializer):
