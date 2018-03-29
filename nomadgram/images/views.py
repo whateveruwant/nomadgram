@@ -11,7 +11,7 @@ def get_created_at(image):
     return image.created_at
 
 
-class Feed(APIView):
+class Images(APIView):
     def get(self, request, format=None):
         user = request.user
         following_users = user.following.all()
@@ -31,6 +31,14 @@ class Feed(APIView):
         # print(sorted_list)
         serializer = serializers.ImageSerializer(sorted_list, many=True)
         return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = serializers.InputImageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(creator=request.user)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LikeImage(APIView):
