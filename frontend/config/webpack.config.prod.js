@@ -182,6 +182,8 @@ module.exports = {
                       options: {
                         importLoaders: 1,
                         minimize: true,
+                        modules: true,
+                        localIdentName: '[path][name]__[local]--[hash:base64:5]',
                         sourceMap: shouldUseSourceMap,
                       },
                     },
@@ -208,7 +210,7 @@ module.exports = {
                     },
                     {
                       loader: require.resolve('sass-loader'),
-                      options: {
+                      options:{
                         sourceMap: true
                       }
                     }
