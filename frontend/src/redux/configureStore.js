@@ -3,7 +3,7 @@ import users from "./modules/users";
 
 const reducer = combineReducers({
     users
-})
+});
 
 let store = initialState => createStore(reducer);
 
